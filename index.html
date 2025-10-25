@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Люблю Pizza - ХЭЛЛОУИН! 👻 Скидки на комбо!</title>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #FF6F00;
+            --danger: #D32F2F;
+            --success: #4CAF50;
+            --gold: #FFD700;
+            --orange: #FF8C00;
+            --text: #fff;
+            --bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #330000 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
+            50% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent), 0 0 60px var(--orange); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(51,0,0,0.8) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '👻 🎃 👻';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite;
+            color: var(--orange);
+            text-shadow: 0 0 30px var(--orange), 0 0 60px var(--danger);
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--accent);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(255,106,0,0.3) 0%, rgba(211,47,47,0.3) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 3px dashed var(--orange);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255,106,0,0.5);
+        }
+
+        .banner-text {
+            font-size: 24px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+        }
+
+        .game-cta {
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,106,0,0.2) 100%);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255,215,0,0.4);
+        }
+
+        .game-cta h2 {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .play-game-btn {
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--gold), var(--accent));
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,215,0,0.6);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite;
+        }
+
+        .play-game-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255,215,0,0.8);
+        }
+
+        .combos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .combo-card {
+            background: linear-gradient(135deg, rgba(30,30,30,0.95) 0%, rgba(60,0,0,0.95) 100%);
+            border: 4px solid var(--orange);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255,106,0,0.3);
+        }
+
+        .combo-card::before {
+            content: '🎃';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .combo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+            animation: glow 1s ease-in-out infinite;
+        }
+
+        .combo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(255,106,0,0.6);
+            border-color: var(--gold);
+        }
+
+        .combo-number {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 28px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .combo-title {
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .combo-emoji {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .combo-description {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .price-section {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .new-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--accent);
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 16px;
+            box-shadow: 0 0 15px var(--danger);
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--danger));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255,106,0,0.5);
+            margin-top: 20px;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255,106,0,0.8);
+            background: linear-gradient(135deg, var(--danger), var(--orange));
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(30,30,30,0.98) 0%, rgba(60,0,0,0.98) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 3px solid var(--orange);
+            box-shadow: 0 0 40px rgba(255,106,0,0.6);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--orange);
+        }
+
+        .modal-title {
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--orange);
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255,106,0,0.5);
+        }
+
+        .form-group input::placeholder {
+            color: #888;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--danger));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255,106,0,0.5);
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(255,106,0,0.8);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        footer {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(51,0,0,0.8) 100%);
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 4px solid var(--orange);
+            color: var(--gold);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            z-index: 2000;
+            animation: float 0.5s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 36px;
+            }
+
+            .combos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .combo-card {
+                padding: 20px;
+            }
+
+            .combo-title {
+                font-size: 20px;
+            }
+
+            .new-price {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">🎃 ЛЮБЛЮ PIZZA 👻</div>
+            <div class="subtitle">НОЧЬ УЖАСОВ И ВКУСНЫХ СКИДОК!</div>
+            <div class="tagline">🦇 Готовимся к Хэллоуину вместе! 🦇</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-banner">
+            <div class="banner-text">🎃 ДЬЯВОЛЬСКИ ВКУСНЫЕ КОМБО! 🎃</div>
+            <div class="banner-text" style="font-size: 32px; color: var(--gold);">СКИДКИ ДО -21%!</div>
+            <div class="banner-text">⏰ ОГРАНИЧЕННОЕ ВРЕМЯ - ТОЛЬКО В НОЧЬ УЖАСОВ!</div>
+        </div>
+
+        <div class="game-cta">
+            <h2>🎮 ИГРАЙ И ВЫИГРЫВАЙ СКИДКУ! 🎮</h2>
+            <p style="margin-bottom: 20px; font-size: 16px;">Поймай тыквы в нашей мини-игре и получи<br><strong>+5% ДОПОЛНИТЕЛЬНУЮ СКИДКУ</strong> на любой комбо!</p>
+            <a href="game.html" style="text-decoration: none;">
+                <button class="play-game-btn">🎃 ИГРАТЬ И ВЫИГРЫВАТЬ! 🎃</button>
+            </a>
+        </div>
+
+        <div class="combos-grid">
+            <!-- КОМБО 1: СТАНДАРТ -->
+            <div class="combo-card">
+                <div class="combo-number">1️⃣</div>
+                <div class="combo-title">👻 СТАНДАРТ 👻</div>
+                <div class="combo-emoji">🍟 🍗 🥤</div>
+                <div class="combo-description">
+                    <strong>Картофель фри</strong> +<br>
+                    <strong>Крылья 3шт</strong> +<br>
+                    <strong>Барская d40</strong><br><br>
+                    <em>Идеально для жуткого перекуса!</em>
+                </div>
+                <div class="price-section">
+                    <div class="old-price">⛔ Было: 491₽</div>
+                    <div class="new-price">🎃 417₽</div>
+                    <span class="discount-badge">-15% СКИДКА!</span>
+                </div>
+                <button class="order-btn" onclick="showOrderForm('СТАНДАРТ', 417)">🛒 ЗАКАЗАТЬ</button>
+            </div>
+
+            <!-- КОМБО 2: ПРЕМИУМ -->
+            <div class="combo-card">
+                <div class="combo-number">2️⃣</div>
+                <div class="combo-title">👑 ПРЕМИУМ 👑</div>
+                <div class="combo-emoji">💎 СЕТ ИСКУШЕНИЕ 💎</div>
+                <div class="combo-description">
+                    <strong>КОРОЛЬ комбо!</strong><br>
+                    Полный набор вкусных<br>
+                    ужасных наслаждений!<br><br>
+                    <em>Для тех, кто не боится призраков!</em>
+                </div>
+                <div class="price-section">
+                    <div class="old-price">⛔ Было: 1985₽</div>
+                    <div class="new-price">🎃 1883₽</div>
+                    <span class="discount-badge">-5% СКИДКА!</span>
+                </div>
+                <button class="order-btn" onclick="showOrderForm('ПРЕМИУМ СЕТ', 1883)">🛒 ЗАКАЗАТЬ</button>
+            </div>
+
+            <!-- КОМБО 3: ВЕЧЕРИНКА -->
+            <div class="combo-card">
+                <div class="combo-number">3️⃣</div>
+                <div class="combo-title">🎉 ВЕЧЕРИНКА 🎉</div>
+                <div class="combo-emoji">🔥 БЕС СКИДОК! 🔥</div>
+                <div class="combo-description">
+                    <strong>Барбекю S</strong> +<br>
+                    <strong>Картофель фри</strong> +<br>
+                    <strong>Крылья 3шт</strong> +<br>
+                    <strong>2x Барская d40</strong><br><br>
+                    <em>На 5-6 человек призраков!</em>
+                </div>
+                <div class="price-section">
+                    <div class="old-price">⛔ Было: 1503₽</div>
+                    <div class="new-price">🎃 1187₽</div>
+                    <span class="discount-badge">-21% СКИДКА!</span>
+                </div>
+                <button class="order-btn" onclick="showOrderForm('ВЕЧЕРИНКА', 1187)">🛒 ЗАКАЗАТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeOrderForm()">&times;</span>
+            <div class="modal-title">🎃 ОФОРМИТЬ ЗАКАЗ 👻</div>
+
+            <div class="form-group">
+                <label>Комбо:</label>
+                <input type="text" id="comboName" readonly style="background: rgba(255,255,255,0.2); cursor: not-allowed;">
+            </div>
+
+            <div class="form-group">
+                <label>Ваше имя:</label>
+                <input type="text" id="customerName" placeholder="Введите ваше имя">
+            </div>
+
+            <div class="form-group">
+                <label>Номер телефона:</label>
+                <input type="tel" id="customerPhone" placeholder="+7 (999) 000-00-00">
+            </div>
+
+            <div class="form-group">
+                <label>Адрес доставки:</label>
+                <input type="text" id="customerAddress" placeholder="Ул. Примерная, д. 1, кв. 1">
+            </div>
+
+            <button class="submit-btn" id="submitBtn" onclick="submitOrder()">ПОДТВЕРДИТЬ ЗАКАЗ 👻</button>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 20px; margin-bottom: 10px;">🎃 ЛЮБЛЮ PIZZA © 2025 🎃</p>
+        <p>🦇 Добро пожаловать в ночь вкусных ужасов! 🦇</p>
+        <p style="margin-top: 15px; font-size: 14px; color: #888;">В любое время: 📞 600-500</p>
+    </footer>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = '8318266784:AAEMm9ODwttqCr3gbATJrjfU7Vkz0eBrcls';
+        const TELEGRAM_CHAT_ID = '450860374';
+
+        let currentCombo = null;
+        let currentPrice = null;
+
+        function showOrderForm(comboName, price) {
+            currentCombo = comboName;
+            currentPrice = price;
+            document.getElementById('comboName').value = comboName + ' - ' + price + '₽';
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('customerAddress').value = '';
+            document.getElementById('orderModal').classList.add('show');
+        }
+
+        function closeOrderForm() {
+            document.getElementById('orderModal').classList.remove('show');
+        }
+
+        async function submitOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+
+            if (!name || !phone || !address) {
+                alert('⚠️ Заполните все поля, призрак!');
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Отправляю...';
+
+            const message = `
+🎃 НОВЫЙ ЗАКАЗ - НОЧЬ УЖАСОВ! 👻
+
+👤 Имя: ${name}
+📱 Телефон: ${phone}
+📍 Адрес: ${address}
+
+🛒 КОМБО: ${currentCombo}
+💰 Сумма: ${currentPrice}₽
+
+🎉 Спасибо за заказ!
+            `;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message
+                    })
+                });
+
+                if (response.ok) {
+                    showNotification('✅ ЗАКАЗ ОТПРАВЛЕН! 👻');
+                    closeOrderForm();
+                    btn.disabled = false;
+                    btn.textContent = 'ПОДТВЕРДИТЬ ЗАКАЗ 👻';
+                } else {
+                    alert('❌ Ошибка! Позвоните: 600-500');
+                    btn.disabled = false;
+                    btn.textContent = 'ПОДТВЕРДИТЬ ЗАКАЗ 👻';
+                }
+            } catch (error) {
+                alert('❌ Ошибка подключения! Позвоните: 600-500');
+                btn.disabled = false;
+                btn.textContent = 'ПОДТВЕРДИТЬ ЗАКАЗ 👻';
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target === modal) {
+                closeOrderForm();
+            }
+        };
+    </script>
+</body>
+</html>
